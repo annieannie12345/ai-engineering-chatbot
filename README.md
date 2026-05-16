@@ -10,7 +10,7 @@ This project helped me practically explore concepts like document ingestion, emb
 
 ## Project Screenshot
 
-![AI Engineering Chatbot Screenshot](Project_Screenshot.png)
+![AI Engineering Chatbot Screenshot](assets/images/project_screenshot.png)
 
 ## Objective
 
