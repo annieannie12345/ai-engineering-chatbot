@@ -315,24 +315,7 @@ Explain MLOps vs LLMOps.
 
 You should see:
 
-- A streamed answer from the local Ollama model.
-- Retrieved source snippets from Pinecone in the side panel.
-
-## API Testing
-
-Health check:
-
-```bash
-curl http://127.0.0.1:5000/api/health
-```
-
-Chat endpoint:
-
-```bash
-curl -X POST http://127.0.0.1:5000/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message":"What is the difference between RAG and fine-tuning?","history":[]}'
-```
+- A streamed answer from the local Ollama model, grounded by Pinecone retrieval behind the scenes.
 
 ## Run Checks
 
@@ -343,66 +326,6 @@ python -m compileall app scripts run.py
 python -m unittest discover -s tests
 pytest
 ```
-
-## Debugging Guide
-
-Problem: `PINECONE_API_KEY is missing`
-
-Fix: Add your real key to `.env`.
-
-Problem: Ollama model not found
-
-Fix:
-
-```bash
-ollama list
-ollama pull qwen2.5:7b-instruct
-ollama pull nomic-embed-text
-```
-
-Problem: Pinecone dimension mismatch
-
-Cause: You created the index with one embedding model and then switched to another.
-
-Fix: Change `PINECONE_INDEX_NAME` in `.env`, or delete and recreate the Pinecone index.
-
-Problem: Answers ignore your documents
-
-Fix:
-
-1. Confirm ingestion finished successfully.
-2. Confirm you are using the same `PINECONE_INDEX_NAME` and `PINECONE_NAMESPACE` in `.env`.
-3. Add better source documents to `data/raw`.
-4. Increase `RETRIEVER_TOP_K` slightly, for example from `4` to `6`.
-
-Problem: The app is slow
-
-Fix:
-
-1. Use `OLLAMA_LLM_MODEL=llama3.2`.
-2. Reduce `RETRIEVER_TOP_K`.
-3. Keep document chunks focused.
-
-## Production Notes
-
-For a real deployment, you should add:
-
-- User authentication.
-- Rate limiting.
-- Request logging and monitoring.
-- Prompt and retrieval evaluation.
-- HTTPS.
-- Error tracking.
-- A managed Ollama host or another production LLM provider.
-- Data governance for any private learning material or company documents.
-
-Run with Gunicorn:
-
-```bash
-gunicorn "app:create_app()" --bind 0.0.0.0:5000 --workers 2 --threads 4
-```
-
-If deploying to a cloud service, remember that the Flask app must be able to reach Ollama. Running Ollama only on your laptop works for local development, not for a hosted web app unless the app is also running on the same machine or a reachable private server.
 
 ## Architecture
 
@@ -416,12 +339,3 @@ flowchart LR
     F --> G["Ollama chat model"]
     G --> H["Streaming answer plus sources"]
 ```
-
-## Next Improvements
-
-- Add document upload from the UI.
-- Add topic filters for ML, DL, RAG, LLMs, agents, and MLOps.
-- Add flashcards or quizzes generated from retrieved context.
-- Add evaluation questions for retrieval quality.
-- Add a local vector store option such as Chroma for offline demos.
-- Add authentication before exposing the app outside your machine.
