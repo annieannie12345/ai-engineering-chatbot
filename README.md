@@ -47,32 +47,6 @@ Ollama Chat Model
 Final Chatbot Response
 ```
 
-## Knowledge Base
-
-The chatbot uses AI Engineering notes stored inside the `data/raw` folder.
-
-The starter document included in this project is:
-
-```text
-data/raw/ai_engineering_guide.md
-```
-
-This file contains beginner-friendly explanations of:
-
-- Machine learning
-- Deep learning
-- Embeddings
-- Vector databases
-- Retrieval-Augmented Generation
-- Large language models
-- Prompt engineering
-- Fine-tuning vs RAG
-- AI agents
-- Evaluation
-- MLOps and LLMOps
-
-More `.md`, `.txt`, or `.pdf` files can be added to `data/raw` and ingested into Pinecone.
-
 ## Features
 
 - Interactive AI Engineering chatbot
@@ -207,12 +181,6 @@ Explain MLOps vs LLMOps.
 The chatbot is able to answer AI Engineering related questions by retrieving relevant information from the Pinecone vector database and generating clear responses using the local Ollama model.
 
 It can explain important AI concepts in a beginner-friendly way and provides an interactive learning experience through a web-based chat interface.
-
-## Note
-
-The `.env` file is not uploaded to GitHub because it contains private API keys.
-
-The quality of the chatbot depends on the quality of documents added to the knowledge base.
 
 ## Author
 
