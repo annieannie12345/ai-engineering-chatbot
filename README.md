@@ -8,6 +8,10 @@ The main goal of this project was to understand how Retrieval-Augmented Generati
 
 This project helped me practically explore concepts like document ingestion, embeddings, vector search, prompt engineering, local LLM usage, and real-time chat response streaming.
 
+## Project Screenshot
+
+![AI Engineering Chatbot Screenshot](Project_Screenshot.png)
+
 ## Objective
 
 - To build an AI tutor chatbot for AI Engineering concepts
